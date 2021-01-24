@@ -5,7 +5,10 @@ class login extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('css');
-		$this->load->view('login_view');
+		$this->load->view('header');
+		$this->load->view('nav_user');
+		$this->load->view('view_login');
 		$this->load->view('js');
+		$this->load->view('footer');
 	}
 }

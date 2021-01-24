@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "create";
+$route['default_controller'] = "admin";
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

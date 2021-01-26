@@ -23,4 +23,25 @@ class user extends CI_Controller {
 		$this->load->view('js');
 		$this->load->view('footer');
 	}
+
+	public function details($recruiting_id)
+	{
+		$this->load->view('css');
+
+		$this->load->view('header');
+		$this->load->view('nav_user');
+
+		$dataUpdate['query3']=$this->recruiting_model->read($recruiting_id);
+		// echo '<pre>';
+		// print_r($dataUpdate);
+		// echo '</pre>';
+		// exit;
+		$dataPosition['query']=$this->recruiting_model->getPosition();
+		$dataLocation['query2']=$this->recruiting_model->getLocation();
+		$this->load->view('css');
+
+		$this->load->view('details_view',$dataUpdate+$dataPosition+$dataLocation);
+		$this->load->view('js');
+	}
+
 }

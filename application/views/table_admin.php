@@ -42,7 +42,7 @@
                 <td><?php echo $rs->insdate;?></td>
                 <td><?php echo $rs->upddate;?></td>
                 <td>
-                    <a class="btn btn-warning" href="<?php echo site_url("admin/update/".$rs->recruiting_id); ?>"><i class="fa fa-fw fa-edit"></i></a>
+                    <a class="btn btn-warning" href="<?php echo site_url("admin/update/".$rs->recruiting_id); ?>" value="<?php echo $rs->recruiting_id;?>"><i class="fa fa-fw fa-edit"></i></a>
                 </td>
                 <td>
                     <a class="btn btn-danger" href="<?php echo site_url("admin/delete/".$rs->recruiting_id); ?>"><i class="fa fa-fw fa-trash-alt"></i></a>

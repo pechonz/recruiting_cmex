@@ -18,6 +18,7 @@ class recruiting_model extends CI_Model {
             $interview_an_date = 'NULL';
         }
 
+        $sess_id = $this->session->userdata('username');
         $data = array(
             'recruiting_id'=> $this->input->post('recruiting_id'),
             'position_id' => $this->input->post('position_id'),
@@ -31,13 +32,13 @@ class recruiting_model extends CI_Model {
             'interview_date' => date( 'Y-m-d', strtotime( $this->input->post('interview_date'))),
             'interview_announcement_date' => $interview_an_date,
             'status' => 'คัดเลือกบุคลากร',
-            'insuserid' => '620025',
+            'insuserid' => $sess_id,
             'interview' => $this->input->post('interview')
         );
 
         $query=$this->db->insert('tb_recruiting',$data);
         if ($query){
-            echo 'Added';
+            
         }
         else{
             echo "Not Added";
@@ -46,6 +47,8 @@ class recruiting_model extends CI_Model {
 
     public function update()
     {
+        $id =$this->input->post('recruiting_id');
+        $sess_id = $this->session->userdata('username');
         $data = array(
             'position_id' => $this->input->post('position_id'),
             'ward_id' => $this->input->post('ward_id'),
@@ -59,9 +62,8 @@ class recruiting_model extends CI_Model {
             'interview_date' => date( 'Y-m-d', strtotime( $this->input->post('interview_date'))),
             'interview_announcement_date' => date( 'Y-m-d', strtotime( $this->input->post('interview_an_date'))),
             'status' => 'คัดเลือกบุคลากร',
-            'insuserid' => '620025',
             'upddate' => date('Y-m-d H:i:s'),
-            'upduserid' => '620025',
+            'upduserid' => $sess_id,
         );
 
         $this->db->where('recruiting_id',$this->input->post('recruiting_id'));

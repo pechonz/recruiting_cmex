@@ -186,7 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <div class="form-group">
                             <label style="font-weight: bold;">ประกาศรับสมัคร</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file" name="pdf_file1" accept=".pdf">
                         </div>
                         <div class="form-group">
                             <label style="font-weight: bold;">ประกาศรายชื่อผู้มีสิทธสอบ</label>

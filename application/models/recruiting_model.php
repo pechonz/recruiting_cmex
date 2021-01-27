@@ -102,6 +102,16 @@ class recruiting_model extends CI_Model {
 
         $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
         $query=$this->db->update('tb_recruiting',$data);
+
+         $data2 = array(
+            'document_name'=> 'test2',
+            'document'=> $this->input->post('pdf_file1'),
+            'upduserid' => $sess_id,
+            'upddate' => date('Y-m-d H:i:s'),
+        );
+
+        $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+        $query2=$this->db->update('tb_document',$data2);
     }
 
     public function deleteModel()

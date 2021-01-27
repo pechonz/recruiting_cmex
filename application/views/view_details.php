@@ -113,6 +113,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <div class="col-md-3"></div>
         </div>
-        <a href="<?php echo base_url().'user/download/S4153989'; ?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-download-alt"></a>
     </form>
 </div>

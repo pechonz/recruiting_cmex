@@ -1,7 +1,7 @@
 <?php
 class recruiting_model extends CI_Model {
     //=======Add data========//
-    public function create()
+    public function createModel()
     {
 
         if ($this->input->post('exam_an_date') !='') {
@@ -26,6 +26,7 @@ class recruiting_model extends CI_Model {
             'applicant_type' => $this->input->post('applicant_type'),
             'position_cnt'=> $this->input->post('position_cnt'),
             'wage' => $this->input->post('wage'),
+            'closing_date' => $this->input->post('closing_date'),
             'exam' => $this->input->post('exam'),
             'exam_date' => date( 'Y-m-d', strtotime( $this->input->post('exam_date'))),
             'exam_announcement_date' => $exam_an_date,
@@ -37,30 +38,63 @@ class recruiting_model extends CI_Model {
         );
 
         $query=$this->db->insert('tb_recruiting',$data);
-        if ($query){
-            
-        }
-        else{
-            echo "Not Added";
-        }
+
+        $data2 = array(
+            'recruiting_id'=> $this->input->post('recruiting_id'),
+            'document_name'=> 'test',
+            'document'=> $this->input->post('pdf_file1'),
+            'insuserid' => $sess_id,
+        );
+
+        $query2=$this->db->insert('tb_document',$data2);
     }
 
-    public function update()
+    public function updateModel()
     {
         $id =$this->input->post('recruiting_id');
         $sess_id = $this->session->userdata('username');
+
+        if ($this->input->post('exam_date') !='') {
+            $exam_date = date( 'Y-m-d', strtotime( $this->input->post('exam_date')));
+        }
+        else {
+            $exam_date = 'NULL';
+        }
+
+        if ($this->input->post('interview_date') !='') {
+            $interview_date = date( 'Y-m-d', strtotime( $this->input->post('interview_date')));
+        }
+        else {
+            $interview_date = 'NULL';
+        }
+
+        if ($this->input->post('exam_an_date') !='') {
+            $exam_an_date = date( 'Y-m-d', strtotime( $this->input->post('exam_an_date')));
+        }
+        else {
+            $exam_an_date = 'NULL';
+        }
+
+        if ($this->input->post('interview_an_date') !='') {
+            $interview_an_date = date( 'Y-m-d', strtotime( $this->input->post('interview_an_date')));
+        }
+        else {
+            $interview_an_date = 'NULL';
+        }
+
         $data = array(
             'position_id' => $this->input->post('position_id'),
             'ward_id' => $this->input->post('ward_id'),
             'applicant_type' => $this->input->post('applicant_type'),
             'position_cnt'=> $this->input->post('position_cnt'),
             'wage' => $this->input->post('wage'),
+            'closing_date' => $this->input->post('closing_date'),
             'exam' => $this->input->post('exam'),
-            'exam_date' => date( 'Y-m-d', strtotime( $this->input->post('exam_date'))),
-            'exam_announcement_date' => date( 'Y-m-d', strtotime( $this->input->post('exam_an_date'))),
+            'exam_date' => $exam_date,
+            'exam_announcement_date' => $exam_an_date,
             'interview' => $this->input->post('interview'),
-            'interview_date' => date( 'Y-m-d', strtotime( $this->input->post('interview_date'))),
-            'interview_announcement_date' => date( 'Y-m-d', strtotime( $this->input->post('interview_an_date'))),
+            'interview_date' => $interview_date,
+            'interview_announcement_date' => $interview_an_date,
             'status' => 'คัดเลือกบุคลากร',
             'upddate' => date('Y-m-d H:i:s'),
             'upduserid' => $sess_id,
@@ -68,27 +102,28 @@ class recruiting_model extends CI_Model {
 
         $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
         $query=$this->db->update('tb_recruiting',$data);
-        
-        
-        if ($query){
-            
-        }
-        else{
-            echo "Not Updated";
-        }
+    }
+
+    public function deleteModel()
+    {
+        $id =$this->input->post('recruiting_id');
+        $sess_id = $this->session->userdata('username');
+
+        $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+        $query=$this->db->delete('tb_recruiting');
     }
 
     //=======Get data========//
-    public function showdata()
+    public function showDataModel()
     {
-        $this->db->select('a.recruiting_id, b.position_name, c.ward_name,a.applicant_type,a.position_cnt,a.wage,a.exam,a.exam_date,a.exam_announcement_date,a.interview,a.interview_date,a.interview_announcement_date,a.status,a.views,a.insuserid,a.upduserid,a.insdate,a.upddate');
+        $this->db->select('a.recruiting_id, b.position_name, c.ward_name,a.applicant_type,a.position_cnt,a.wage,a.closing_date,a.exam,a.exam_date,a.exam_announcement_date,a.interview,a.interview_date,a.interview_announcement_date,a.status,a.views,a.insuserid,a.upduserid,a.insdate,a.upddate');
         $this->db->from('tb_recruiting as a,tb_position as b, tb_location1 as c');
         $this->db->where('a.position_id = b.position_code and a.ward_id=ward_code');
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function getPosition()
+    public function getPositionModel()
     {
         $this->db->select('a.position_code,a.position_name');
         $this->db->from('tb_position as a');
@@ -97,7 +132,7 @@ class recruiting_model extends CI_Model {
         return $query->result();
     }
 
-    public function getLocation()
+    public function getLocationModel()
     {
         $this->db->select('a.ward_code,a.ward_name');
         $this->db->from('tb_location1 as a');
@@ -106,7 +141,7 @@ class recruiting_model extends CI_Model {
         return $query->result();
     }
 
-    public function read($recruiting_id)
+    public function readModel($recruiting_id)
     {
         $this->db->select('*');
         $this->db->from('tb_recruiting as a');
@@ -121,5 +156,4 @@ class recruiting_model extends CI_Model {
         }
         return $query->result();
     }
-
 }

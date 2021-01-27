@@ -10,7 +10,7 @@ class user extends CI_Controller {
 
 	public function index()
 	{
-		$dataRecruiting['query']=$this->recruiting_model->showdata();
+		$dataRecruiting['query']=$this->recruiting_model->showdataModel();
 		// echo '<pre>';
 		// print_r($dataLocation);
 		// echo '</pre>';
@@ -31,16 +31,16 @@ class user extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('nav_user');
 
-		$dataUpdate['query3']=$this->recruiting_model->read($recruiting_id);
+		$dataUpdate['query3']=$this->recruiting_model->readModel($recruiting_id);
 		// echo '<pre>';
 		// print_r($dataUpdate);
 		// echo '</pre>';
 		// exit;
-		$dataPosition['query']=$this->recruiting_model->getPosition();
-		$dataLocation['query2']=$this->recruiting_model->getLocation();
+		$dataPosition['query']=$this->recruiting_model->getPositionModel();
+		$dataLocation['query2']=$this->recruiting_model->getLocationModel();
 		$this->load->view('css');
 
-		$this->load->view('details_view',$dataUpdate+$dataPosition+$dataLocation);
+		$this->load->view('view_details',$dataUpdate+$dataPosition+$dataLocation);
 		$this->load->view('js');
 	}
 

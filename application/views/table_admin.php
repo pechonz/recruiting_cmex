@@ -18,6 +18,7 @@
               <th scope="col">ประเภท</th>
               <th scope="col">ตำแหน่งว่าง</th>
               <th scope="col">เงินเดือน</th>
+              <th scope="col">สิ้นสุดรับสมัคร</th>
               <th scope="col">สถานะ</th>
               <th scope="col">ผู้ประกาศ</th> 
               <th scope="col">ผู้อัพเดทประกาศ</th> 
@@ -36,6 +37,7 @@
                 <td><?php echo $rs->applicant_type;?></td>
                 <td><?php echo $rs->position_cnt;?></td>
                 <td><?php echo $rs->wage;?></td>
+                <td><?php echo $rs->closing_date;?></td>
                 <td><?php echo $rs->status;?></td>
                 <td><?php echo $rs->insuserid;?></td>
                 <td><?php echo $rs->upduserid;?></td>

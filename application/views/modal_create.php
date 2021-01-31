@@ -158,7 +158,7 @@
                         </div>
                     </div>
                     <div class="form-row" style="padding-bottom: 10px">
-                        <button type="submit" class="btn btn-primary">SAVE</button>
+                        <button type="submit" class="btn btn-success">เพิ่ม</button>
                     </div>
                 </form>
             </div>

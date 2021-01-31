@@ -1,5 +1,5 @@
 <footer class="footer">
   <div class="container">
-    <span>&copy; 2021 Center of Medical Excellence. All Rights Reserved.</span>
+    <span>&copy; 2021 Develop by Naruephon Sooksinchai</span>
   </div>
 </footer>

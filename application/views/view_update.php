@@ -181,6 +181,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                        
                                   </div>
                                 </div>
+                                <div class="form-row">
+                                  <div class="col">
+                                      <label style="font-weight: bold;">สถานะ</label>
+                                      <div>
+                                        <select class="custom-select" name="status">
+                                            <option value="ประกาศรับสมัคร">ประกาศรับสมัคร</option>
+                                            <option value="ประกาศรายชื่อผู้มีสิทธิ์สอบ">ประกาศรายชื่อผู้มีสิทธิ์สอบ</option>
+                                            <option value="ประกาศผลการสอบ">ประกาศผลการสอบ</option>
+                                            <option value="สิ้นสุดการคัดเลือก">สิ้นสุดการคัดเลือก</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                                  <div class="col"></div>
+                                </div>
 
                             </div>
                         </div>

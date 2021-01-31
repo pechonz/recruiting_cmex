@@ -9,7 +9,7 @@
 
 <div class="container-fluid" style="padding-top: 10px">
     <div class="table-responsive">
-        <table id="adminTable" class="table table-bordered table-hover" cellspacing="0" width="100%">
+        <table id="userTable" class="table table-bordered table-hover" cellspacing="0" width="100%">
           <thead>
             <tr>
               <th scope="col">ประกาศ</th>

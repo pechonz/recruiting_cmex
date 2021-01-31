@@ -107,7 +107,7 @@ class recruiting_model extends CI_Model {
             'exam_announcement_date' => $exam_an_date,
             'interview_date' => date( 'Y-m-d', strtotime( $this->input->post('interview_date'))),
             'interview_announcement_date' => $interview_an_date,
-            'status' => 'คัดเลือกบุคลากร',
+            'status' => 'ประกาศรับสมัคร',
             'insuserid' => $sess_id,
             'interview' => $this->input->post('interview')
         );
@@ -162,7 +162,7 @@ class recruiting_model extends CI_Model {
             'interview' => $this->input->post('interview'),
             'interview_date' => $interview_date,
             'interview_announcement_date' => $interview_an_date,
-            'status' => 'คัดเลือกบุคลากร',
+            'status' => $this->input->post('status'),
             'upddate' => date('Y-m-d H:i:s'),
             'upduserid' => $sess_id,
         );
@@ -488,7 +488,7 @@ class recruiting_model extends CI_Model {
     {
         $this->db->select('a.recruiting_id, b.position_name, c.ward_name,a.applicant_type,a.position_cnt,a.wage,a.closing_date,a.exam,a.exam_date,a.exam_announcement_date,a.interview,a.interview_date,a.interview_announcement_date,a.status,a.views,a.insuserid,a.upduserid,a.insdate,a.upddate');
         $this->db->from('tb_recruiting as a,tb_position as b, tb_location1 as c');
-        $this->db->where('a.position_id = b.position_code and a.ward_id=ward_code');
+        $this->db->where('a.position_id = b.position_code and a.ward_id=ward_code and a.status NOT LIKE "สิ้นสุดการคัดเลือก"');
         $query = $this->db->get();
         return $query->result();
     }

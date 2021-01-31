@@ -487,16 +487,16 @@ class recruiting_model extends CI_Model {
     public function showDataModel()
     {
         $this->db->select('a.recruiting_id, b.position_name, c.ward_name,a.applicant_type,a.position_cnt,a.wage,a.closing_date,a.exam,a.exam_date,a.exam_announcement_date,a.interview,a.interview_date,a.interview_announcement_date,a.status,a.views,a.insuserid,a.upduserid,a.insdate,a.upddate');
-        $this->db->from('tb_recruiting as a,tb_position as b, tb_location1 as c');
-        $this->db->where('a.position_id = b.position_code and a.ward_id=ward_code and a.status NOT LIKE "สิ้นสุดการคัดเลือก"');
+        $this->db->from('tb_recruiting as a,sev_position as b, tb_location1 as c');
+        $this->db->where('a.position_id = b.position_id and a.ward_id=ward_code and a.status NOT LIKE "สิ้นสุดการคัดเลือก"');
         $query = $this->db->get();
         return $query->result();
     }
 
     public function getPositionModel()
     {
-        $this->db->select('a.position_code,a.position_name');
-        $this->db->from('tb_position as a');
+        $this->db->select('a.position_id,a.position_name');
+        $this->db->from('sev_position as a');
         $this->db->where('a.position_name is not null');
         $query = $this->db->get();
         return $query->result();

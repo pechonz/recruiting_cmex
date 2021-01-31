@@ -65,7 +65,7 @@
                                 <select class="custom-select" name="position_id">
                                     <option selected>โปรดเลือก</option>
                                     <?php foreach ($query as $rs) { ?>
-                                        <option value=<?php echo $rs->position_code;?>><?php echo $rs->position_name;?></option>
+                                        <option value=<?php echo $rs->position_id;?>><?php echo $rs->position_name;?></option>
                                     <?php } ?>
                                 </select>
                             </div>

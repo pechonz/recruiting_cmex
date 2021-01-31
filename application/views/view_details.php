@@ -47,8 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </script>
 
 <div class="container py-5">
-    <form action="<?php echo site_url('admin/updateData');?>" method="post" class="form">
-        <div class="row">
+    <form class="form">
+      <div class="card">
+        <div class="card-header" style="font-weight: bold">รายละเอียด</div>
+        <div class="card-body">
+          <div class="row">
           <div class="col-md-3"></div>
           <div class="col-md-3">
             <label for="exampleAccount" style="font-weight: bold;">ตำแหน่ง</label>
@@ -95,8 +98,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <p><?php echo $query3->position_cnt;?></p>
           </div>
           <div class="col-md-3">
-              <label for="exampleFirst" style="font-weight: bold;">ตำแหน่งว่าง</label>
-              <p><?php echo $query3->position_cnt;?></p>
+            <label class="form-check-label" style="font-weight: bold;">สิ้นสุดรับสมัคร</label>
+            <p><?php echo $query3->closing_date;?></p>
           </div>
           <div class="col-md-3"></div>
         </div>
@@ -113,5 +116,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
           <div class="col-md-3"></div>
         </div>
+
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <?php foreach ($query4 as $rs) { ?>
+            <?php if ($rs->document_id == '01'): ?>
+                <a class="btn btn-secondary" href="<?php echo base_url() ?>./uploads/<?php echo $rs->document_name;?>"><i class="fa fa-fw fa-file-pdf"></i>ประกาศรับสมัคร</a><br><br>
+
+            <?php elseif ($rs->document_id == '02'): ?>
+                <a class="btn btn-secondary" href="<?php echo base_url() ?>./uploads/<?php echo $rs->document_name;?>"><i class="fa fa-fw fa-file-pdf"></i>ประกาศรายชื่อผู้มีสิทธิ์สอบ</a><br><br>
+
+            <?php elseif ($rs->document_id == '03'): ?>
+                <a class="btn btn-secondary" href="<?php echo base_url() ?>./uploads/<?php echo $rs->document_name;?>"><i class="fa fa-fw fa-file-pdf"></i>ประกาศรายชื่อผู้มีสิทธิ์สอบ</a><br><br>
+
+            <?php else: ?>
+                <a class="btn btn-secondary" href="<?php echo base_url() ?>./uploads/<?php echo $rs->document_name;?>"><i class="fa fa-fw fa-file-pdf"></i>ประกาศผลการคัดเลือก</a><br><br>
+                
+            <?php endif; ?>  
+        <?php } ?>
+          </div>
+          <div class="col-md-6"></div>
+        </div>
+        </div>
+      </div>
     </form>
 </div>

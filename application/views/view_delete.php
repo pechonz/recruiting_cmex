@@ -68,6 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="container py-5">
     <form action="<?php echo site_url('admin/deleteData');?>" method="post" class="form">
+      <input type="hidden" class="form-control" name="recruiting_id" value="<?php echo $query3->recruiting_id;?>">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">

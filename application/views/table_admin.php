@@ -12,6 +12,7 @@
         <table id="adminTable" class="table table-bordered table-hover" cellspacing="0" width="100%">
           <thead>
             <tr>
+              <th scope="col">ประกาศ</th>
               <th scope="col">รหัส</th>
               <th scope="col">ตำแหน่ง</th>
               <th scope="col">หน่วยงาน</th>
@@ -21,8 +22,7 @@
               <th scope="col">สิ้นสุดรับสมัคร</th>
               <th scope="col">สถานะ</th>
               <th scope="col">ผู้ประกาศ</th> 
-              <th scope="col">ผู้อัพเดทประกาศ</th> 
-              <th scope="col">ประกาศ</th>
+              <th scope="col">ผู้อัพเดทประกาศ</th>
               <th scope="col">อัพเดทประกาศ</th>
               <th scope="col">แก้ไข</th>
               <th scope="col">ลบ</th>
@@ -31,6 +31,7 @@
           <tbody>
             <?php foreach ($query as $rs) { ?>
             <tr>
+                <td><?php echo $rs->insdate;?><br><p style="color: #FF0000"><?php echo $rs->views;?> Views</p></td>
                 <td><?php echo $rs->recruiting_id;?></td>
                 <td><?php echo $rs->position_name;?></td>
                 <td><?php echo $rs->ward_name;?></td>
@@ -41,7 +42,6 @@
                 <td><?php echo $rs->status;?></td>
                 <td><?php echo $rs->insuserid;?></td>
                 <td><?php echo $rs->upduserid;?></td>
-                <td><?php echo $rs->insdate;?></td>
                 <td><?php echo $rs->upddate;?></td>
                 <td>
                     <a class="btn btn-warning" href="<?php echo site_url("admin/update/".$rs->recruiting_id); ?>" value="<?php echo $rs->recruiting_id;?>"><i class="fa fa-fw fa-edit"></i></a>

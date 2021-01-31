@@ -4,6 +4,7 @@ class recruiting_model extends CI_Model {
     public function createModel()
     {
 
+        $sess_id = $this->session->userdata('username');
         if ($this->input->post('exam_an_date') !='') {
             $exam_an_date = date( 'Y-m-d', strtotime( $this->input->post('exam_an_date')));
         }
@@ -17,8 +18,82 @@ class recruiting_model extends CI_Model {
         else {
             $interview_an_date = 'NULL';
         }
+        
+        $array = array(
+            'document_id' => "01",
+            'recruiting_id' => $this->input->post('recruiting_id')
+        );
+        $this->db->select('*');
+        $this->db->from('tb_document');
+        $this->db->where($array);
+        $query = $this->db->get();
+        //================================================================================================
+        if ($query->num_rows() > 0 && !empty($_FILES['pdf_file1']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "01";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
 
-        $sess_id = $this->session->userdata('username');
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file1'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'upduserid' => $sess_id,
+                    'upddate' => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+                $this->db->where('document_id','01');
+                $query=$this->db->update('tb_document',$data);
+            }
+        }
+        else if (!empty($_FILES['pdf_file1']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "01";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file1'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'recruiting_id'=> $this->input->post('recruiting_id'),
+                    'document_id'=> "01",
+                    'document_name'=> $this->input->post('recruiting_id') . "_" . "01" .".pdf",
+                    'insuserid' => $sess_id,
+                );
+                $query=$this->db->insert('tb_document',$data);
+            }
+        }
+        else {
+
+        }
+        
         $data = array(
             'recruiting_id'=> $this->input->post('recruiting_id'),
             'position_id' => $this->input->post('position_id'),
@@ -39,14 +114,6 @@ class recruiting_model extends CI_Model {
 
         $query=$this->db->insert('tb_recruiting',$data);
 
-        $data2 = array(
-            'recruiting_id'=> $this->input->post('recruiting_id'),
-            'document_name'=> 'test',
-            'document'=> $this->input->post('pdf_file1'),
-            'insuserid' => $sess_id,
-        );
-
-        $query2=$this->db->insert('tb_document',$data2);
     }
 
     public function updateModel()
@@ -103,15 +170,305 @@ class recruiting_model extends CI_Model {
         $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
         $query=$this->db->update('tb_recruiting',$data);
 
-         $data2 = array(
-            'document_name'=> 'test2',
-            'document'=> $this->input->post('pdf_file1'),
-            'upduserid' => $sess_id,
-            'upddate' => date('Y-m-d H:i:s'),
+        $array = array(
+            'document_id' => "01",
+            'recruiting_id' => $this->input->post('recruiting_id')
         );
+        $this->db->select('*');
+        $this->db->from('tb_document');
+        $this->db->where($array);
+        $query = $this->db->get();
+        //================================================================================================
+        if ($query->num_rows() > 0 && !empty($_FILES['pdf_file1']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "01";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
 
-        $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
-        $query2=$this->db->update('tb_document',$data2);
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file1'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'upduserid' => $sess_id,
+                    'upddate' => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+                $this->db->where('document_id','01');
+                $query=$this->db->update('tb_document',$data);
+            }
+        }
+        else if (!empty($_FILES['pdf_file1']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "01";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file1'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'recruiting_id'=> $this->input->post('recruiting_id'),
+                    'document_id'=> "01",
+                    'document_name'=> $this->input->post('recruiting_id') . "_" . "01" .".pdf",
+                    'insuserid' => $sess_id,
+                );
+                $query=$this->db->insert('tb_document',$data);
+            }
+        }
+        else {
+
+        }
+        
+        //================================================================================================
+        $array = array(
+            'document_id' => "02",
+            'recruiting_id' => $this->input->post('recruiting_id')
+        );
+        $this->db->select('*');
+        $this->db->from('tb_document');
+        $this->db->where($array);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 && !empty($_FILES['pdf_file2']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "02";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file2'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'upduserid' => $sess_id,
+                    'upddate' => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+                $this->db->where('document_id','02');
+                $query=$this->db->update('tb_document',$data);
+            }
+        }
+        else if (!empty($_FILES['pdf_file2']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "02";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file2'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'recruiting_id'=> $this->input->post('recruiting_id'),
+                    'document_id'=> "02",
+                    'document_name'=> $this->input->post('recruiting_id') . "_" . "02".".pdf",
+                    'insuserid' => $sess_id,
+                );
+                $query=$this->db->insert('tb_document',$data);
+            }
+        }
+        else {
+
+        }
+
+        //================================================================================================
+        $array = array(
+            'document_id' => "03",
+            'recruiting_id' => $this->input->post('recruiting_id')
+        );
+        $this->db->select('*');
+        $this->db->from('tb_document');
+        $this->db->where($array);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 && !empty($_FILES['pdf_file3']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "03";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file3'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'upduserid' => $sess_id,
+                    'upddate' => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+                $this->db->where('document_id','03');
+                $query=$this->db->update('tb_document',$data);
+            }
+        }
+        else if (!empty($_FILES['pdf_file3']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "03";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file3'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'recruiting_id'=> $this->input->post('recruiting_id'),
+                    'document_id'=> "02",
+                    'document_name'=> $this->input->post('recruiting_id') . "_" . "03".".pdf",
+                    'insuserid' => $sess_id,
+                );
+                $query=$this->db->insert('tb_document',$data);
+            }
+        }
+        else {
+
+        }
+
+        //================================================================================================
+        $array = array(
+            'document_id' => "04",
+            'recruiting_id' => $this->input->post('recruiting_id')
+        );
+        $this->db->select('*');
+        $this->db->from('tb_document');
+        $this->db->where($array);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0 && !empty($_FILES['pdf_file4']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "04";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file4'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'upduserid' => $sess_id,
+                    'upddate' => date('Y-m-d H:i:s'),
+                );
+                $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+                $this->db->where('document_id','04');
+                $query=$this->db->update('tb_document',$data);
+            }
+        }
+        else if (!empty($_FILES['pdf_file4']['name'])){
+            $sess_id = $this->session->userdata('username');
+            $filename = $this->input->post('recruiting_id');
+            $userid = $this->session->userdata('username');
+            $config['upload_path']          = './uploads/';
+            $config['file_name']            = $filename . "_" . "04";
+            $config['allowed_types']        = 'pdf';
+            $config['overwrite']            = TRUE;
+            $config['max_size']             = 10000;
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload',$config);
+            if (!$this->upload->do_upload('pdf_file4'))
+            {
+                echo $this->upload->display_errors();
+            }
+            else
+            {
+                $this->upload->overwrite = true;
+                $data = $this->upload->data();
+                $filename = $data['file_name'];
+                $data = array(
+                    'recruiting_id'=> $this->input->post('recruiting_id'),
+                    'document_id'=> "04",
+                    'document_name'=> $this->input->post('recruiting_id') . "_" . "04".".pdf",
+                    'insuserid' => $sess_id,
+                );
+                $query=$this->db->insert('tb_document',$data);
+            }
+        }
+        else {
+
+        }
     }
 
     public function deleteModel()
@@ -121,6 +478,9 @@ class recruiting_model extends CI_Model {
 
         $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
         $query=$this->db->delete('tb_recruiting');
+
+        $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+        $query=$this->db->delete('tb_document');
     }
 
     //=======Get data========//
@@ -164,6 +524,38 @@ class recruiting_model extends CI_Model {
         else {
             return FALSE;
         }
+        return $query->result();
+    }
+
+    public function detailsModel($recruiting_id)
+    {
+        $id =$recruiting_id;
+        $this->db->set('views', 'views+1', FALSE);
+        $this->db->where('recruiting_id',$this->input->post('recruiting_id'));
+        $this->db->update('tb_recruiting');
+
+        $this->db->select('*');
+        $this->db->from('tb_recruiting as a');
+        $this->db->where('a.recruiting_id',$recruiting_id);
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0){
+            $data = $query->row();
+            return $data;
+        }
+        else {
+            return FALSE;
+        }
+        return $query->result();
+    }
+
+    public function documentModel($recruiting_id)
+    {
+        $id =$recruiting_id;
+        $this->db->select('a.document_id,a.document_name');
+        $this->db->from('tb_document as a');
+        $this->db->where('a.recruiting_id',$id);
+        $query = $this->db->get();
         return $query->result();
     }
 }

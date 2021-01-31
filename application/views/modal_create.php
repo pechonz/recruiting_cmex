@@ -52,7 +52,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo site_url('admin/create');?>" method="post" class="form">
+                <form action="<?php echo site_url('admin/create');?>" method="post" class="form" enctype="multipart/form-data">
                     <div class="form-row" style="padding-bottom: 10px">
                         <div class="col">
                             <label style="font-weight: bold;">ตำแหน่งเลขที่</label>
@@ -152,33 +152,11 @@
                     <div class="form-row" style="padding-bottom: 10px">
                         <div class="col">
                             <div class="form-group">
-                                <label style="font-weight: bold;">Example file input</label>
-                                <input type="file" class="form-control-file" name="pdf_file1" accept=".pdf">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                            <label style="font-weight: bold;">Example file input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                <label style="font-weight: bold;">ประกาศรับสมัคร</label>
+                                <input type="file" class="form-control-file" name="pdf_file1">
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-row" style="padding-bottom: 10px">
-                        <div class="col">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Example file input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                            <label style="font-weight: bold;">Example file input</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-row" style="padding-bottom: 10px">
                         <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>

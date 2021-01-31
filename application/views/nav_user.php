@@ -5,7 +5,7 @@
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
       <a class="nav-link" title="เข้าสู่ระบบ" href="<?php echo site_url('login');?>">
-       <i class="fa fa-fw fa-sign-in-alt"></i>
+       <i class="fa fa-fw fa-sign-in-alt"></i>สำหรับเจ้าหน้าที่
       </a>
     </li>
   </ul>

@@ -67,10 +67,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </script>
 
 <div class="container py-5">
-    <form action="<?php echo site_url('admin/updateData');?>" method="post" class="form">
+    <form action="<?php echo site_url('admin/updateData');?>" method="post" class="form" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
+                  <input type="hidden" class="form-control" name="recruiting_id" value="<?php echo $query3->recruiting_id;?>">
                     <div class="col-md-10 offset-md-1">                    
                         <!-- form complex example -->
                         <div class="form-row mt-4">
@@ -184,21 +185,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label style="font-weight: bold;">ประกาศรับสมัคร</label>
-                            <input type="file" class="form-control-file" name="pdf_file1" accept=".pdf">
+                        <div class="form-row" style="padding-bottom: 10px">
+                          <div class="col">
+                              <div class="form-group">
+                                  <label style="font-weight: bold;">ประกาศรับสมัคร</label>
+                                  <input type="file" class="form-control-file" name="pdf_file1" accept=".pdf">
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="form-group">
+                                  <label style="font-weight: bold;">ประกาศรายชื่อผู้มีสิทธิ์สอบ</label>
+                                  <input type="file" class="form-control-file" name="pdf_file2" accept=".pdf">
+                              </div>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label style="font-weight: bold;">ประกาศรายชื่อผู้มีสิทธสอบ</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                        <div class="form-group">
-                            <label style="font-weight: bold;">ประกาศผลสอบ</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                        <div class="form-group">
-                            <label style="font-weight: bold;">ผลการคัดเลือก</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+
+                        <div class="form-row" style="padding-bottom: 10px">
+                          <div class="col">
+                              <div class="form-group">
+                                  <label style="font-weight: bold;">ประกาศผลสอบ</label>
+                                  <input type="file" class="form-control-file" name="pdf_file3" accept=".pdf">
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="form-group">
+                                  <label style="font-weight: bold;">ประกาศผลการคัดเลือก</label>
+                                  <input type="file" class="form-control-file" name="pdf_file4" accept=".pdf">
+                              </div>
+                          </div>
                         </div>
                         <hr>
                         <button type="submit" class="btn btn-primary">บันทึก</button>
